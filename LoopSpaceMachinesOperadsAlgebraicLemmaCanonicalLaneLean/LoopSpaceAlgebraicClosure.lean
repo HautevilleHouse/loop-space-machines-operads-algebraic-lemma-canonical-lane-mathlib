@@ -1,0 +1,28 @@
+import canonicalLaneMathlib.AdmissibleClass
+
+namespace HautevilleHouse
+namespace LoopSpaceMachinesOperadsAlgebraicLemmaCanonicalLaneLean
+
+def bridgeClosed (A : AdmissibleClass) : Prop :=
+  LoopSpaceAlgebraicOperadClosed A.object
+
+theorem bridge_from_admissible_class (A : AdmissibleClass) :
+    bridgeClosed A := by
+  exact A.object.conclusion
+
+def gateClosed (A : AdmissibleClass) : Prop :=
+  A.endpointSatisfied ∨ A.remainderRecorded
+
+theorem gate_from_admissible_class (A : AdmissibleClass) :
+    gateClosed A := by
+  exact A.gateWitness
+
+def ConstrainedLoopSpaceAlgebraicClosure (A : AdmissibleClass) : Prop :=
+  bridgeClosed A ∧ gateClosed A
+
+theorem constrained_loop_space_algebraic_endgame (A : AdmissibleClass) :
+    ConstrainedLoopSpaceAlgebraicClosure A := by
+  exact And.intro (bridge_from_admissible_class A) (gate_from_admissible_class A)
+
+end LoopSpaceMachinesOperadsAlgebraicLemmaCanonicalLaneLean
+end HautevilleHouse
